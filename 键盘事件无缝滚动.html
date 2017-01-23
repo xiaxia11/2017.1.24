@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body {
+			margin: 0;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#wrap {
+			width: 400px;
+			height: 162px;
+			margin: 100px auto;
+			top: 0;
+			overflow: hidden;
+			
+		}
+		#list{
+			width: 400px;
+			height: 400%;
+			position: relative;
+		}
+		
+		img {
+			width: 400px;
+			height: 162px;
+			vertical-align: top;
+		}
+		#list2 {
+			width: 400%;
+			height: 162px;
+			position: relative;
+		}
+		#list2 li {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="list">
+			<li><img src = "images/img1.gif"></li>
+			<li><img src = "images/img2.gif"></li>
+		</ul>
+	</div>
+<script src="miaov.js"></script>
+<script>
+(function(){
+	//var list = document.getElementById("list");
+	//var wrap = document.getElementById("wrap");
+	//var lis = list.getElementsByTagName("li")[0];
+	var imgs = list.getElementsByTagName("img");
+	//var liH = css(lis,"height");//162
+	var arr = ["images/img1.gif","images/img2.gif","images/img3.gif","images/img4.gif"];
+	var now = 0;
+	//上和右都是now--  下和左now++
+	window.onkeydown = function(ev){
+		var code = ev.keyCode;
+		switch(code){
+			//上
+			case 38:
+				var ul = document.getElementsByTagName("ul")[0];
+				ul.id = "list";
+				imgs[1].src = arr[now];//第一张图片等于数组的第0张图
+				list.style.left = 0;
+				list.style.top = "-162px";
+				now--;
+				//过界
+				if(now < 0){
+					now = arr.length -1;
+				}
+				imgs[0].src = arr[now];//第0张显示的是数组的最后一张图
+				mTween(list,{top:0},500,"linear");
+				break;
+			//下	
+			case 40:
+				var ul = document.getElementsByTagName("ul")[0];
+				ul.id = "list";
+				imgs[0].src = arr[now];//第0张
+				//console.log(now) 0
+				list.style.left = 0;
+				list.style.top = 0;
+				now++;
+				//过界
+				if(now > arr.length -1){
+					now = 0;
+				}
+				//console.log(now) 
+				imgs[1].src = arr[now];//第一张
+				mTween(list,{top:-162},500,"linear");
+				break;
+			//左	
+			case 37:
+				var ul = document.getElementsByTagName("ul")[0];
+				ul.id = "list2";
+				//console.log(ul)
+				imgs[1].src = arr[now];//第一张显示的是数组的第0张
+				list2.style.top = 0;
+				list2.style.left = "-400px";
+				
+				now--;
+				//过界
+				if(now < 0){
+					now = arr.length -1;
+				}
+				imgs[0].src = arr[now];//数组的最后一张
+				mTween(list2,{left:0},500,"linear");
+				break;
+			//右	
+			case 39:
+				var ul = document.getElementsByTagName("ul")[0];
+				ul.id = "list2";
+				//console.log(ul)
+				list2.style.top = 0;
+				list2.style.left = 0;
+				imgs[0].src = arr[now];//第0张
+				
+				now++;
+				//过界
+				
+				if(now > arr.length -1){
+					now = 0;
+				}
+				imgs[1].src = arr[now];//数组的最后一张
+				mTween(list2,{left:-400},500,"linear");
+				break;
+		}
+		
+		
+	
+	}
+		
+
+})()
+</script>
+</body>
+</html>
